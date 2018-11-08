@@ -1,6 +1,9 @@
-# Containerized CellProfiler
+## NOTE
+I am not affiliated with the developers of [CellProfiler](http://cellprofiler.org/). I just wanted to run their software and avoid having to install a lot of extra packages on my own computer. Using docker I only had to install the software once and I can run it anywere.
 
-This dockerfile will build a working CellProfiler image, version 3.1.5 as of now.
+# Containerized CellProfiler for Ubuntu
+
+This dockerfile will build a working CellProfiler image, version 3.1.5 as of now. Tested only on Ubuntu 16.04.
 
 ```bash
 ### creating the image
