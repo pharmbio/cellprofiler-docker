@@ -14,10 +14,13 @@ $ docker build -t dahlo/cellprofiler:3.1.5 .
 $ docker pull dahlo/cellprofiler:3.1.5
 
 
-
-
 ### running the image
-$ docker run -ti -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v /host_path/to/imgs/:/mnt/img:ro -v cellprofiler:/mnt/data dahlo/cellprofiler:3.1.5 
+$ docker run -ti \
+             -e DISPLAY=$DISPLAY \
+             -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+             -v /host_path/to/imgs/:/mnt/img:ro \
+             -v cellprofiler:/mnt/data \
+             dahlo/cellprofiler:3.1.5 
 ```
 
 
