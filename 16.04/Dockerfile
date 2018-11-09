@@ -7,9 +7,9 @@ VOLUME /mnt/data /mnt/img
 
 
 # # add apt mirrors
-RUN echo "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial main restricted universe multiverse" > /etc/apt/sources.list && \
-    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
-    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-security main restricted universe multiverse" >> /etc/apt/sources.list
+RUN echo "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic main restricted universe multiverse" > /etc/apt/sources.list && \
+    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb mirror://mirrors.ubuntu.com/mirrors.txt bionic-security main restricted universe multiverse" >> /etc/apt/sources.list
 
 
 # update system
@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y
 
 # install tools
 RUN apt-get install -y \ 
-        build-essential=12.1ubuntu2 \ 
+        build-essentialz \ 
         cython=0.23.4-0ubuntu5 \ 
         git=1:2.7.4-0ubuntu1.5 \ 
         libmysqlclient-dev=5.7.24-0ubuntu0.16.04.1 \ 
