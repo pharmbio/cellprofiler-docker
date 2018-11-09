@@ -1,4 +1,5 @@
 FROM ubuntu:16.04
+LABEL version="3.1.5"
 
 # define volumes
 VOLUME /mnt/data /mnt/img
