@@ -21,7 +21,6 @@ $ docker run -e DISPLAY=$DISPLAY \
              -v /host_path/to/imgs/:/mnt/img:ro \
              -v cellprofiler:/mnt/data \
              pharmbio/cellprofiler:v4.0.2
-```
 
 
 ### running the image interactivly for troubleshooting
@@ -33,7 +32,7 @@ $ docker run -it \
              -v /path/to/imgs:/mnt/img:ro  \
              -v cellprofiler:/mnt/data \
              pharmbio/cellprofiler:v4.0.2
-
+```
 
 
 ## TODO
