@@ -36,6 +36,7 @@ $ docker run -it \
 
 
 ## TODO
+* Clean up the v4.0.2/Dockerfile and structure the commands, add version numbers etc.
 * On startup there is an error about wxWebView extensions not being installed. Not quite sure how to get rid of it, except trying to compile wx from source, which i spent too many hours on in the past to try again. Not sure in what way cellprofiler uses it, but if there is any significant drawback of not having it i will give it another go. Leaving as is for now.
 
 
