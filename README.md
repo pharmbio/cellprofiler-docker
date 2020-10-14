@@ -35,6 +35,18 @@ $ docker run -it \
 ```
 
 
+# Using Singularity
+
+Docker makes the gui interaction harder to get to work remotely. Using Singularity it was much easier, as the Singularity container is run as the user and the user's home directory, where the Xauth stuff is, is available inside the container without doing mountpoints etc.
+
+```bash
+# pull the image
+$ singularity pull cellprofiler.v4.0.2.sif docker://pharmbio/cellprofiler:v4.0.2
+
+# run the image
+$ singularity run cellprofiler.v4.0.2.sif
+```
+
 ## TODO
 * On startup there is an error about wxWebView extensions not being installed. Not quite sure how to get rid of it, except trying to compile wx from source, which i spent too many hours on in the past to try again. Not sure in what way cellprofiler uses it, but if there is any significant drawback of not having it i will give it another go. Leaving as is for now.
 
