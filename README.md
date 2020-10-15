@@ -23,15 +23,16 @@ $ docker run -e DISPLAY=$DISPLAY \
              pharmbio/cellprofiler:v4.0.2
 
 
-### running the image interactivly for troubleshooting
-$ docker run -it \
-             --entrypoint /bin/bash \
-             -e DISPLAY=$DISPLAY \
-             -u `id -u` \
-             -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
-             -v /path/to/imgs:/mnt/img:ro  \
+### running the image in headless mode
+$ docker run -v /path/to/imgs:/mnt/img:ro  \
              -v cellprofiler:/mnt/data \
-             pharmbio/cellprofiler:v4.0.2
+             pharmbio/cellprofiler:v4.0.2 \
+             -r \
+             -c \
+             -p $PIPELINE_FILE \
+             --data-file $IMAGESET_FILE \
+             -o $OUTPUT_PATH
+             
 ```
 
 
@@ -64,15 +65,16 @@ singularity exec cellprofiler.v4.0.2.sif \
     -o $OUTPUT_PATH
 
 # when submitting as a batch job, run it in headless mode,
-# and mounting a folder from outside the container
-singularity exec cellprofiler.v4.0.2.sif \
+# and mounting a folder from outside the container.
+# make sure the paths are valid inside the container as well,
+# otherwise use --bind to structure it the way you want.
+singularity exec --bind /path/to/imgs cellprofiler.v4.0.2.sif \
     cellprofiler \
     -r \
     -c \
     -p $PIPELINE_FILE \
     --data-file $IMAGESET_FILE \
     -o $OUTPUT_PATH
-    --bind /path/to/imgs
 ```
 
 ## TODO
