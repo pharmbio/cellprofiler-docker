@@ -72,7 +72,7 @@ singularity exec cellprofiler.v4.0.2.sif \
     -p $PIPELINE_FILE \
     --data-file $IMAGESET_FILE \
     -o $OUTPUT_PATH
-    --bind /path/to/network_storage
+    --bind /path/to/imgs
 ```
 
 ## TODO
