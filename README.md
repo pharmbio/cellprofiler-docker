@@ -43,8 +43,36 @@ Docker makes the gui interaction harder to get to work remotely. Using Singulari
 # pull the image
 $ singularity pull cellprofiler.v4.0.2.sif docker://pharmbio/cellprofiler:v4.0.2
 
-# run the image
+
+
+# run the cellprofiler graphically to build pipelines etc
 $ singularity run cellprofiler.v4.0.2.sif
+
+# run the cellprofiler graphically to build pipelines etc,
+# and mounting a folder from outside the container
+$ singularity run --bind /path/to/imgs cellprofiler.v4.0.2.sif
+
+
+
+# when submitting as a batch job, run it in headless mode
+singularity exec cellprofiler.v4.0.2.sif \
+    cellprofiler \
+    -r \
+    -c \
+    -p $PIPELINE_FILE \
+    --data-file $IMAGESET_FILE \
+    -o $OUTPUT_PATH
+
+# when submitting as a batch job, run it in headless mode,
+# and mounting a folder from outside the container
+singularity exec cellprofiler.v4.0.2.sif \
+    cellprofiler \
+    -r \
+    -c \
+    -p $PIPELINE_FILE \
+    --data-file $IMAGESET_FILE \
+    -o $OUTPUT_PATH
+    --bind /path/to/network_storage
 ```
 
 ## TODO
