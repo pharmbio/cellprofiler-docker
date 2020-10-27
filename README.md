@@ -23,17 +23,59 @@ $ docker run -e DISPLAY=$DISPLAY \
              pharmbio/cellprofiler:v4.0.2
 
 
-### running the image interactivly for troubleshooting
-$ docker run -it \
-             --entrypoint /bin/bash \
-             -e DISPLAY=$DISPLAY \
-             -u `id -u` \
-             -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
-             -v /path/to/imgs:/mnt/img:ro  \
+### running the image in headless mode
+$ docker run -v /path/to/imgs:/mnt/img:ro  \
              -v cellprofiler:/mnt/data \
-             pharmbio/cellprofiler:v4.0.2
+             pharmbio/cellprofiler:v4.0.2 \
+             -r \
+             -c \
+             -p $PIPELINE_FILE \
+             --data-file $IMAGESET_FILE \
+             -o $OUTPUT_PATH
+             
 ```
 
+
+# Using Singularity
+
+Docker makes the gui interaction harder to get to work remotely. Using Singularity it was much easier, as the Singularity container is run as the user and the user's home directory, where the Xauth stuff is, is available inside the container without doing mountpoints etc.
+
+```bash
+# pull the image
+$ singularity pull cellprofiler.v4.0.2.sif docker://pharmbio/cellprofiler:v4.0.2
+
+
+
+# run the cellprofiler graphically to build pipelines etc
+$ singularity run cellprofiler.v4.0.2.sif
+
+# run the cellprofiler graphically to build pipelines etc,
+# and mounting a folder from outside the container
+$ singularity run --bind /path/to/imgs cellprofiler.v4.0.2.sif
+
+
+
+# when submitting as a batch job, run it in headless mode
+singularity exec cellprofiler.v4.0.2.sif \
+    cellprofiler \
+    -r \
+    -c \
+    -p $PIPELINE_FILE \
+    --data-file $IMAGESET_FILE \
+    -o $OUTPUT_PATH
+
+# when submitting as a batch job, run it in headless mode,
+# and mounting a folder from outside the container.
+# make sure the paths are valid inside the container as well,
+# otherwise use --bind to structure it the way you want.
+singularity exec --bind /path/to/imgs cellprofiler.v4.0.2.sif \
+    cellprofiler \
+    -r \
+    -c \
+    -p $PIPELINE_FILE \
+    --data-file $IMAGESET_FILE \
+    -o $OUTPUT_PATH
+```
 
 ## TODO
 * On startup there is an error about wxWebView extensions not being installed. Not quite sure how to get rid of it, except trying to compile wx from source, which i spent too many hours on in the past to try again. Not sure in what way cellprofiler uses it, but if there is any significant drawback of not having it i will give it another go. Leaving as is for now.
