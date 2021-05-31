@@ -1,7 +1,5 @@
 FROM ubuntu:16.04
 
-ARG version=4.0.6
-
 # set the timezone
 ENV TZ=Europe/Stockholm
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -29,6 +27,7 @@ RUN python3.8 -m pip install wxPython-4.1.0-cp38-cp38-linux_x86_64.whl
 RUN rm wxPython-4.1.0-cp38-cp38-linux_x86_64.whl
 
 # Install CellProfiler
+ARG version=4.0.7
 RUN python3.8 -m pip install cellprofiler==$version
 
 # Set the locale

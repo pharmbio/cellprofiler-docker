@@ -3,15 +3,15 @@ I am not affiliated with the developers of [CellProfiler](http://cellprofiler.or
 
 # Containerized CellProfiler for Ubuntu
 
-This dockerfile will build a working CellProfiler image, version 4.0.2 as of now. Tested only on Ubuntu 20.04.
+This dockerfile will build a working CellProfiler image.
 
 ```bash
 ### creating the image
 # if you want to roll your own
-$ docker build -t pharmbio/cellprofiler:v4.0.2 v4.0.2/
+$ docker build -t pharmbio/cellprofiler:v4.1.3 v4.1.3/
 
 # if you want to pull from docker hub
-$ docker pull pharmbio/cellprofiler:v4.0.2
+$ docker pull pharmbio/cellprofiler:v4.1.3
 
 
 ### running the image
@@ -20,13 +20,13 @@ $ docker run -e DISPLAY=$DISPLAY \
              -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
              -v /host_path/to/imgs/:/mnt/img:ro \
              -v cellprofiler:/mnt/data \
-             pharmbio/cellprofiler:v4.0.2
+             pharmbio/cellprofiler:v4.1.3
 
 
 ### running the image in headless mode
 $ docker run -v /path/to/imgs:/mnt/img:ro  \
              -v cellprofiler:/mnt/data \
-             pharmbio/cellprofiler:v4.0.2 \
+             pharmbio/cellprofiler:v4.1.3 \
              -r \
              -c \
              -p $PIPELINE_FILE \
@@ -42,21 +42,21 @@ Docker makes the gui interaction harder to get to work remotely. Using Singulari
 
 ```bash
 # pull the image
-$ singularity pull cellprofiler.v4.0.2.sif docker://pharmbio/cellprofiler:v4.0.2
+$ singularity pull cellprofiler.v4.1.3.sif docker://pharmbio/cellprofiler:v4.1.3
 
 
 
 # run the cellprofiler graphically to build pipelines etc
-$ singularity run cellprofiler.v4.0.2.sif
+$ singularity run cellprofiler.v4.1.3.sif
 
 # run the cellprofiler graphically to build pipelines etc,
 # and mounting a folder from outside the container
-$ singularity run --bind /path/to/imgs cellprofiler.v4.0.2.sif
+$ singularity run --bind /path/to/imgs cellprofiler.v4.1.3.sif
 
 
 
 # when submitting as a batch job, run it in headless mode
-singularity exec cellprofiler.v4.0.2.sif \
+singularity exec cellprofiler.v4.1.3.sif \
     cellprofiler \
     -r \
     -c \
@@ -68,7 +68,7 @@ singularity exec cellprofiler.v4.0.2.sif \
 # and mounting a folder from outside the container.
 # make sure the paths are valid inside the container as well,
 # otherwise use --bind to structure it the way you want.
-singularity exec --bind /path/to/imgs cellprofiler.v4.0.2.sif \
+singularity exec --bind /path/to/imgs cellprofiler.v4.1.3.sif \
     cellprofiler \
     -r \
     -c \

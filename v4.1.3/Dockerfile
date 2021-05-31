@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 ARG VERSION=v4.1.3
 
 # set timezone
-ENV TZ=Europe/Zurich
+ENV TZ=Europe/Stockholm
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # add apt mirrors
@@ -40,7 +40,7 @@ ENV PATH=$PATH:/home/ubuntu/.local/bin
 
 # install Python dependencies
 RUN wget https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04/wxPython-4.1.0-cp38-cp38-linux_x86_64.whl && \
-    pip3 install numpy wxPython-4.1.0-cp38-cp38-linux_x86_64.whl
+    pip3 install numpy==1.20.1 wxPython-4.1.0-cp38-cp38-linux_x86_64.whl
 
 # install Cellprofiler
 RUN git clone --depth 1 --branch ${VERSION} https://github.com/CellProfiler/CellProfiler.git && cd CellProfiler && pip3 install . 
