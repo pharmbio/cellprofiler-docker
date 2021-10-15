@@ -40,19 +40,23 @@ ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH=$PATH:/home/ubuntu/.local/bin
 
 # install Python dependencies
-RUN wget https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04/wxPython-4.1.0-cp38-cp38-linux_x86_64.whl && \
-    pip3 install numpy==1.20.1 wxPython-4.1.0-cp38-cp38-linux_x86_64.whl cellpose==0.6.5
+RUN wget https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04/wxPython-4.1.0-cp38-cp38-linux_x86_64.whl
+RUN pip3 install \
+        numpy==1.20.1 \
+        wxPython-4.1.0-cp38-cp38-linux_x86_64.whl \
+        cellpose==0.6.5
 
 # fetch Cellprofiler
 RUN git clone --depth 1 --branch ${VERSION} https://github.com/CellProfiler/CellProfiler.git
-WORKDIR /CellProfiler
 
 # download the CellPose plugin
-RUN cd plugins && wget https://github.com/CellProfiler/CellProfiler-plugins/blob/master/runcellpose.py 
+RUN cd /CellProfiler/plugins && wget https://raw.githubusercontent.com/CellProfiler/CellProfiler-plugins/master/runcellpose.py
 
 # install CellProfiler
-RUN pip3 install . 
+RUN cd /CellProfiler && pip3 install .
 
+# trigger download of pre-built images
+RUN python3 -m cellpose
 
 # set entrypoint
-ENTRYPOINT ["cellprofiler"]
+ENTRYPOINT ["cellprofiler", "--plugins-directory", "/CellProfiler/plugins"]
